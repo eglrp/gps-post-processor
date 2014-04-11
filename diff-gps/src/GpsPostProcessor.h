@@ -1,8 +1,6 @@
 #ifndef GPSPOSTPROCESSOR_H
 #define GPSPOSTPROCESSOR_H
 
-#include <stdio.h>
-
 class GpsPostProcessor {
 
   private:
