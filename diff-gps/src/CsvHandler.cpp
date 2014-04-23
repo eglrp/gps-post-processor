@@ -1,9 +1,4 @@
-#include <iostream>
-#include <sstream>
-#include <string>
-#include <fstream>
-#include <stdlib.h>
-#include <vector>
+
 #include "CsvHandler.h"
 
 using namespace std;
@@ -13,6 +8,10 @@ using namespace std;
 CsvHandler::CsvHandler(string filename)
 {
 	this->infile = filename;
+	
+}
+
+ClientGpsData CsvHandler::getClientData() {
 	numLines();
 	//cout << this->numLines << "\n";
 	readCsv();
@@ -25,11 +24,11 @@ void CsvHandler::numLines()
 	while (std::getline(infile, line)) ++number_of_lines;
 	this->lines = number_of_lines;
 }
-void CsvHandler::readCsv(){
+ClientGpsData CsvHandler::readCsv(){
 	
 	vector<vector<double> > possitions;
 	vector<vector<bool> > satellites;
-	vector<long> times;
+	vector<long int> times;
 	possitions.resize(this->lines);
 	satellites.resize(this->lines);
 	times.resize(this->lines);
@@ -62,4 +61,6 @@ void CsvHandler::readCsv(){
         }
        	i++;
     }
+    ClientGpsData myClientGpsData(this->lines, times, possitions, satellites);
+    return myClientGpsData;
 }

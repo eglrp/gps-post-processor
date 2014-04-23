@@ -17,28 +17,63 @@ class ClientGpsData {
     // "M" replaces "0..m"
     // "AXES" replaces "3", I'm pretty sure this was because it's for
     //   3-dimensional coordinates
-    static const int N = 1;
-    static const int M = 1;
+    int N;
+    static const int M = 86;
     static const int AXES = 3;
 
-    vector<int> time;
-    double initialCart[N][AXES];
-    double correctedCart[N][AXES];
-    double initialGeo[N][AXES];
-    double correctedGeo[N][AXES];
-    bool satellites[N][M];
-    int8_t flags[N];
+    vector<long> theTime;
+    vector<vector<double> > initialCart; //[N][AXES];
+    vector<vector<double> > correctedCart; //[N][AXES];
+    vector<vector<double> > initialGeo; //[N][AXES];
+    vector<vector<double> > correctedGeo; //[N][AXES];
+    vector<vector<bool> > satellites; //[N][M];
+    vector<int8_t> flags; //[N];
     string inUnits;
     string outUnits;
     string nearestStationID;
-    double stationCoords[AXES];
+    vector<double> stationCoords; //[AXES];
     double stationDist;
 
   public:
-    ClientGpsData();
+    ClientGpsData(int);
 
-    vector<int> getTime();
-    void setTime(const vector<int>&);
+    ClientGpsData(int,vector<long>,vector<vector<double> >,vector<vector<bool> >);
+
+    vector<long> getTheTime();
+    void setTheTime(const vector<long>&);
+
+    vector<int8_t> getFlags();
+    void setFlags(const vector<int8_t>&);
+
+    vector<vector<double> > getInitialCart();
+    void setInitialCart(const vector<vector<double> >&);
+
+    vector<vector<double> > getCorrectedCart();
+    void setCorrectedCart(const vector<vector<double> >&);
+
+    vector<vector<double> > getInitialGeo();
+    void setInitialGeo(const vector<vector<double> >&);
+
+    vector<vector<double> > getCorrectedGeo();
+    void setCorrectedGeo(const vector<vector<double> >&);
+
+    string getInUnits();
+    void setInUnits(const string&);
+
+    string getOutUnits();
+    void setOutUnits(const string&);
+
+    string getNearestStationID();
+    void setNearestStationID(const string&);
+
+    vector<double> getStationCoords();
+    void setStationCoords(const vector<double>&);
+
+    double getStationDist();
+    void setStationDist(const double&);
+
+    vector<vector<bool> > getSatellites();
+    void setSatellites( const vector<vector<bool> >&);
 };
 
 #endif

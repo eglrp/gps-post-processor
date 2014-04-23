@@ -7,18 +7,19 @@
 #include <fstream>
 #include <stdlib.h>
 #include <vector>
+#include "ClientGpsData.h"
 using namespace std;
 
 class CsvHandler {
 private:
-	void readCsv();
+	ClientGpsData readCsv();
 	void numLines();
 	string infile;
 	int lines;
 
 public:
 	CsvHandler(string);
-	int runInput();
+	ClientGpsData getClientData();
 	string runOutput();
 };
 
