@@ -17,9 +17,11 @@ ClientGpsData::ClientGpsData(int length, vector<long> theTime, vector<vector<dou
 	cout << initialCoords.size() << "\n";
 	if (initialCoords[0][0] <  91.0) {
 		this->initialGeo = initialCoords;
+		this->inUnits = "Geo";
 	}
 	else {
 		this->initialCart = initialCoords;
+		this->inUnits = "Cart";
 	}
 	cout << "set init coords\n";
 }
