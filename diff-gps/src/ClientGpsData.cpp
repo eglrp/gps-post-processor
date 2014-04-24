@@ -1,4 +1,5 @@
 #include "ClientGpsData.h"
+#include <stdlib.h>
 
 using namespace std;
 
@@ -8,15 +9,19 @@ ClientGpsData::ClientGpsData(int length ) {
 
 ClientGpsData::ClientGpsData(int length, vector<long> theTime, vector<vector<double> > initialCoords, vector<vector<bool> > satellites) {
 	this->N = length;
+	cout << "set length\n";
 	this->theTime = theTime;
+	cout << "set time\n";
 	this->satellites = satellites;
-
+	cout << "set satellites\n";
+	cout << initialCoords.size() << "\n";
 	if (initialCoords[0][0] <  91.0) {
 		this->initialGeo = initialCoords;
 	}
 	else {
 		this->initialCart = initialCoords;
 	}
+	cout << "set init coords\n";
 }
 
 vector<long> ClientGpsData::getTheTime() {

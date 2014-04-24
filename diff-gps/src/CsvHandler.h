@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <vector>
 #include "ClientGpsData.h"
+
 using namespace std;
 
 class CsvHandler {
@@ -19,7 +20,10 @@ private:
 
 public:
 	CsvHandler(string);
+	CsvHandler();
 	ClientGpsData getClientData();
+	ClientGpsData getClientData(string);
+	void setFileName(string);
 	string runOutput();
 };
 

@@ -3,29 +3,48 @@
 
 using namespace std;
 
-
+CsvHandler::CsvHandler(){}
 
 CsvHandler::CsvHandler(string filename)
 {
+	this->infile = filename;	
+}
+
+void CsvHandler::setFileName(string filename) {
 	this->infile = filename;
-	
 }
 
 ClientGpsData CsvHandler::getClientData() {
+	cout << "Getting client data.... \n";
 	numLines();
-	//cout << this->numLines << "\n";
-	readCsv();
+	cout << "Calculated numLines \n";
+	ClientGpsData myClientGpsData = readCsv();
+	return myClientGpsData;
+}
+ClientGpsData CsvHandler::getClientData(string filename) {
+	cout << "Getting client data.... \n";
+	this->infile = filename;
+	cout << "Calculated numLines \n";
+	numLines();
+	cout << "Reading CSV and creating myClientGpsData\n";
+	ClientGpsData myClientGpsData = readCsv();
+	cout << "Returning myClientGpsData\n";
+	return myClientGpsData;
 }
 void CsvHandler::numLines()
 {
 	int number_of_lines = 0;
 	string line;
 	ifstream infile(this->infile.c_str());
-	while (std::getline(infile, line)) ++number_of_lines;
+	while (std::getline(infile, line)) {
+		//cout << line;
+		++number_of_lines;
+	}
 	this->lines = number_of_lines;
 }
 ClientGpsData CsvHandler::readCsv(){
-	
+	cout << "In readCsv\n";
+	cout << "The Csv has this many lines: " << this->lines << "\n";
 	vector<vector<double> > possitions;
 	vector<vector<bool> > satellites;
 	vector<long int> times;
@@ -39,7 +58,7 @@ ClientGpsData CsvHandler::readCsv(){
 		satellites[i].resize(86);
 		for (int j=0; j< 86; ++j) satellites[i][j] = false;
 	}
-
+	cout << "initialized value vectors\n";
 
     ifstream infile(this->infile.c_str());
     //ifstream infile("loc_log__2014_62_1812.csv");
@@ -61,6 +80,8 @@ ClientGpsData CsvHandler::readCsv(){
         }
        	i++;
     }
+    cout << "Csv File read and vectors filled with values\n";
     ClientGpsData myClientGpsData(this->lines, times, possitions, satellites);
+    cout << "created instance of ClientGpsData\n";
     return myClientGpsData;
 }
