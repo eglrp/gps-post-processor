@@ -3,6 +3,7 @@
 
 #include "CsvHandler.h"
 #include "ClientGpsData.h"
+#include "UnitConverter.h"
 #include <vector>
 #include <stdint.h>
 
@@ -12,16 +13,17 @@ class GpsPostProcessor {
     GpsPostProcessor() {};
     GpsPostProcessor(GpsPostProcessor const&);
     GpsPostProcessor& operator=(GpsPostProcessor const&);
-    CsvHandler myCsvHandler = CsvHandler();
+    CsvHandler myCsvHandler;
 
     // BaseStationMgr *    bsM;
     // CsvHandler *        csvHandler;
     // DownloadMgr *       dlMgr;
     // FileSystemMgr *     fsMgr;
     // RinexMgr *          rinexMgr;
-    // UnitConverter *     unitConverter;
 
   public:
+    UnitConverter unitConverter;
+
     static GpsPostProcessor& getInstance();
     void runPostProcessor(string);
     // void submitCsv(ifstream csvData);
