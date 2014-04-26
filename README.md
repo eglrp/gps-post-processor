@@ -6,6 +6,7 @@ Project for CSCI 4448: Object-Oriented Analysis and Design, Spring 2014 at Unive
 
 Online Files
 * [Project Part 2 Write-up on Google Drive](https://docs.google.com/document/d/11ZYlaCbc_-gzKwfqhztlTY8-qe2mE0jQOBmyxXgaEPE)
+* [Project Part 4 Write-up on Google Drive](https://docs.google.com/document/d/1yLMd5OnVX_YpGLAsmxOOJYFe-SOqzFD0wAlEKY_cd3Y)
 * [UML Class Diagram on draw.io](https://www.draw.io/#G0B1qTpXqWjW9sUVZBUms0VTJMQ1k)
 
 Other links
