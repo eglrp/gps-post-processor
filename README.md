@@ -10,3 +10,12 @@ Online Files
 
 Other links
 * [Pivotal Tracker](https://www.pivotaltracker.com/s/projects/1056358)
+
+
+
+## Development
+To use the GPSTk library, follow the instructions under [Building and Installing in a UNIX-like Environment using CMake](http://www.gpstk.org/bin/view/Documentation/BuildingGPSTkUnderUnix).
+
+This should generate `libgpstk.so`, which should be installed to `/usr/local/lib/`.
+
+
