@@ -11,8 +11,10 @@ class UnitConverter {
 
 public:
 	UnitConverter() {};
-	vector<double> geoToCart(double, double, double);
-	vector<double> cartToGeo(double, double, double);
+	vector<double> geoToCart(double, double, double); // Geodetic WGS84 Ellipsoid (degrees/meters) to ECEF Cartesian (meters)
+	vector<double> cartToGeo(double, double, double); // ECEF Cartesian (meters) to Geodetic WGS84 Ellipsoid (degrees/meters)
+	//string getYear(int unixTime);
+	//string getDayOfYear(int unixTime);
 
 };
 
