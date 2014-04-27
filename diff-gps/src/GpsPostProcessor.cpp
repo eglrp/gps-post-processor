@@ -3,10 +3,11 @@
 using namespace std;
 
 GpsPostProcessor& GpsPostProcessor::getInstance() {
-  static GpsPostProcessor instance;
-  instance.unitConverter = UnitConverter();
-  instance.myCsvHandler = CsvHandler();
-  return instance;
+  static GpsPostProcessor instanceGPSPP;
+  instanceGPSPP.unitConverter = UnitConverter();
+  instanceGPSPP.myCsvHandler = CsvHandler();
+  instanceGPSPP.fsMgr = FileSystemMgr();
+  return instanceGPSPP;
 }
 
 void GpsPostProcessor::runPostProcessor(string filename) {
@@ -22,7 +23,7 @@ int main(int argc, char* argv[]) {
   GpsPostProcessor& gpp = GpsPostProcessor::getInstance();
   cout << "created instance of GpsPostProcessor\n";
   gpp.runPostProcessor("./client-data/loc_log__2014_62_1812.csv");
-
+  cout << gpp.fsMgr.getRinexUrl();
   // unitconverter test code (best practice would be to have real unit tests with
   // known values)
   double lat = 1.0;
