@@ -2,3 +2,4 @@ diff-gps/build/*
 *.o
 diff-gps/gpstk/**/*.a
 *~
+diff-gps/gpstk/
