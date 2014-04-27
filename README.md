@@ -12,11 +12,42 @@ Online Files
 Other links
 * [Pivotal Tracker](https://www.pivotaltracker.com/s/projects/1056358)
 
+### Using GPSTk
 
+#### Working with pre-built library
 
-## Development
-To use the GPSTk library, follow the instructions under [Building and Installing in a UNIX-like Environment using CMake](http://www.gpstk.org/bin/view/Documentation/BuildingGPSTkUnderUnix).
+(This probably only works on 64-bit Ubuntu 12, the OS setup on the CU CSCI VM)
 
-This should generate `libgpstk.so`, which should be installed to `/usr/local/lib/`.
+The source is included in the repo as a tarball to keep the size smaller. To extract it to a `gpstk/` directory:
+```
+cd diff-gps/
+tar xvzf gpstk-2.1.src.tar.gz
+```
+* `ls gpstk/` to list the contents and confirm the `tar` command worked
 
+You must copy `libgpstk.so` into `/usr/lib`:
 
+`sudo cp diff-gps/gpstk-build/libgpstk.so /usr/lib`
+
+#### Building from Scratch
+
+Directions adapted from [gpstk.org](http://www.gpstk.org/bin/view/Documentation/BuildingGPSTkUnderUnix).
+
+Prerequisites:
+* CMake; check with `cmake --version`. GPSTk docs don't specify a version.
+* g++ version 4.7.3 (part of the [GNU Compiler Collection](http://gcc.gnu.org/)); check with `g++ --version`
+
+```
+cd diff-gps/
+tar xvzf gpstk-2.1.src.tar.gz
+mkdir gpstk-build/
+cd gpstk/
+mkdir build/
+cd build/
+cmake -DCMAKE_INSTALL_PREFIX:PATH=../../gpstk-build/ ../
+make
+make install
+cp src/libgpstk.so ../../gpstk-build/
+cd ../../
+sudo cp gpstk-build/libgpstk.so /usr/lib/
+```
