@@ -1,10 +1,17 @@
 #include "UnitConverter.h"
 
+UnitConverter::UnitConverter() {
+  gpstk::WGS84Ellipsoid ellipsoid;
+
+  A = ellipsoid.a();
+  eccSq = ellipsoid.eccSquared();
+}
+
 vector<double> UnitConverter::geoToCart(double lat, double lon, double alt) {
   gpstk::Triple geoTrip (lat, lon, alt);
   gpstk::Triple cartTrip;
 
-  gpstk::Position::convertGeocentricToCartesian(geoTrip, cartTrip);
+  gpstk::Position::convertGeodeticToCartesian(geoTrip, cartTrip, A, eccSq);
 
   vector<double> cartVec (3,0);
   cartVec[0] = cartTrip[0];
@@ -18,7 +25,7 @@ vector<double> UnitConverter::cartToGeo(double x, double y, double z) {
   gpstk::Triple cartTrip (x, y, z);
   gpstk::Triple geoTrip;
 
-  gpstk::Position::convertCartesianToGeocentric(cartTrip, geoTrip);
+  gpstk::Position::convertCartesianToGeodetic(cartTrip, geoTrip, A, eccSq);
 
   vector<double> geoVec (3,0);
   geoVec[0] = geoTrip[0];
