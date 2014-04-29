@@ -16,8 +16,11 @@ class BaseStation {
   	vector<double> trueEcefCoord;
   	string stationId;
   public:
+  	BaseStation();
   	BaseStation(vector<double>,string);
   	string getStationId();
-  	vector<double> getTrueEcefCoord(); 
+  	vector<double> getTrueEcefCoord();
+  	void setTrueEcefCoord(vector<double>);
+  	void setStationId(string);
 };
 #endif

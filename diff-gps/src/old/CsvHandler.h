@@ -4,10 +4,8 @@
 #include <iostream>
 #include <sstream>
 #include <string>
-#include <sstream>
 #include <fstream>
 #include <stdlib.h>
-#include <stdio.h>
 #include <vector>
 #include "ClientGpsData.h"
 
@@ -19,6 +17,7 @@ private:
 	void numLines();
 	string infile;
 	int lines;
+
 public:
 	CsvHandler(string);
 	CsvHandler();
@@ -26,7 +25,6 @@ public:
 	ClientGpsData getClientData(string);
 	void setFileName(string);
 	string runOutput();
-	void writeCsv(ClientGpsData);
 };
 
 #endif

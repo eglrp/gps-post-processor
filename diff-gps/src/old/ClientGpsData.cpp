@@ -3,9 +3,11 @@
 
 using namespace std;
 
+ClientGpsData::ClientGpsData(int length ) {
+	this->N = length;
+}
 
-
-ClientGpsData::ClientGpsData(int length, vector<long long> theTime, vector<vector<long double> > initialCoords, vector<vector<bool> > satellites) {
+ClientGpsData::ClientGpsData(int length, vector<long> theTime, vector<vector<double> > initialCoords, vector<vector<bool> > satellites) {
 	this->N = length;
 	cout << "set length\n";
 	this->theTime = theTime;
@@ -13,9 +15,6 @@ ClientGpsData::ClientGpsData(int length, vector<long long> theTime, vector<vecto
 	this->satellites = satellites;
 	cout << "set satellites\n";
 	cout << initialCoords.size() << "\n";
-	cout << length << "\n";
-	cout << theTime.size() << "\n";
-	cout << satellites.size() << "\n";
 	if (initialCoords[0][0] <  91.0) {
 		this->initialGeo = initialCoords;
 		this->inUnits = "Geo";
@@ -26,13 +25,11 @@ ClientGpsData::ClientGpsData(int length, vector<long long> theTime, vector<vecto
 	}
 	cout << "set init coords\n";
 }
-ClientGpsData::ClientGpsData(int length ) {
-	this->N = length;
-}
-vector<long long> ClientGpsData::getTheTime() {
+
+vector<long> ClientGpsData::getTheTime() {
 	return this->theTime;
 }
-void ClientGpsData::setTheTime(const vector<long long>& theTime){
+void ClientGpsData::setTheTime(const vector<long>& theTime){
 	this->theTime = theTime;
 }
 
@@ -43,31 +40,31 @@ void ClientGpsData::setFlags(const vector<int8_t>& flags) {
 	this->flags = flags;
 }
 
-vector<vector<long double> > ClientGpsData::getInitialCart() {
+vector<vector<double> > ClientGpsData::getInitialCart() {
 	return this->initialCart;
 }
-void ClientGpsData::setInitialCart(const vector<vector<long double> >& initialCart) {
+void ClientGpsData::setInitialCart(const vector<vector<double> >& initialCart) {
 	this->initialCart = initialCart;
 }
 
-vector<vector<long double> > ClientGpsData::getCorrectedCart() {
+vector<vector<double> > ClientGpsData::getCorrectedCart() {
 	return this->correctedCart;
 }
-void ClientGpsData::setCorrectedCart(const vector<vector<long double> >& correctedCart) {
+void ClientGpsData::setCorrectedCart(const vector<vector<double> >& correctedCart) {
 	this->correctedCart = correctedCart;
 }
 
-vector<vector<long double> > ClientGpsData::getInitialGeo() {
+vector<vector<double> > ClientGpsData::getInitialGeo() {
 	return this->initialGeo;
 }
-void ClientGpsData::setInitialGeo(const vector<vector<long double> >& initialGeo) {
+void ClientGpsData::setInitialGeo(const vector<vector<double> >& initialGeo) {
 	this-> initialGeo = initialGeo;
 }
 
-vector<vector<long double> > ClientGpsData::getCorrectedGeo() {
+vector<vector<double> > ClientGpsData::getCorrectedGeo() {
 	return this->correctedGeo;
 }
-void ClientGpsData::setCorrectedGeo(const vector<vector<long double> >& correctedGeo) {
+void ClientGpsData::setCorrectedGeo(const vector<vector<double> >& correctedGeo) {
 	this->correctedGeo = correctedGeo;
 }
 
@@ -92,17 +89,17 @@ void ClientGpsData::setNearestStationID(const string& nearestStationID) {
 	this->nearestStationID = nearestStationID;
 }
 
-vector<long double> ClientGpsData::getStationCoords() {
+vector<double> ClientGpsData::getStationCoords() {
 	return this->stationCoords;
 }
-void ClientGpsData::setStationCoords(const vector<long double>& stationCoords){
+void ClientGpsData::setStationCoords(const vector<double>& stationCoords){
 	this->stationCoords = stationCoords;
 }
 
-long double ClientGpsData::getStationDist() {
+double ClientGpsData::getStationDist() {
 	return this->stationDist;
 }
-void ClientGpsData::setStationDist(const long double& stationDist) {
+void ClientGpsData::setStationDist(const double& stationDist) {
 	this->stationDist = stationDist;
 }
 

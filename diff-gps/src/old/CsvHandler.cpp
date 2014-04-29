@@ -45,9 +45,9 @@ void CsvHandler::numLines()
 ClientGpsData CsvHandler::readCsv(){
 	cout << "In readCsv\n";
 	cout << "The Csv has this many lines: " << this->lines << "\n";
-	vector<vector<long double> > possitions;
+	vector<vector<double> > possitions;
 	vector<vector<bool> > satellites;
-	vector<long long int> times;
+	vector<long int> times;
 	possitions.resize(this->lines);
 	satellites.resize(this->lines);
 	times.resize(this->lines);
@@ -68,59 +68,20 @@ ClientGpsData CsvHandler::readCsv(){
         stringstream strstr(line);
         string word = "";
         int j = 0;
-        //long long int w = 0;
-        //long double x = 0.0;
-        //long double y = 0.0;
-        //long double z = 0.0;
-        sscanf(line.c_str(), "%lli,%Lf,%Lf,%Lf\n",&times[i], &possitions[i][0], &possitions[i][1], &possitions[i][2]);
         while (getline(strstr,word, ',')) 
         {       	
         	if (j>3) { satellites[i][atoi(word.c_str())] = true; }
+        	else if (j==0) { times[i] = atoi(word.c_str());}
+        	else if (j==1) { possitions[i][0] = atof(word.c_str());}
+        	else if (j==2) { possitions[i][1] = atof(word.c_str());}
+        	else if (j==3) { possitions[i][2] = atof(word.c_str());}
         	//cout << word << '\n';
         	j++;
         }
        	i++;
     }
     cout << "Csv File read and vectors filled with values\n";
-    ClientGpsData myClientGpsData = ClientGpsData(this->lines, times, possitions, satellites);
+    ClientGpsData myClientGpsData(this->lines, times, possitions, satellites);
     cout << "created instance of ClientGpsData\n";
-    //vector<vector<long double> > possitions = myClientGpsData.getP;
-    cout << "size of possitons ==";
-    cout << possitions.size();
     return myClientGpsData;
-}
-void CsvHandler::writeCsv(ClientGpsData myClientGpsData){
-	cout << "Writing new CSV file \n";
-	vector<long long> times = myClientGpsData.getTheTime();
-	vector<vector<long double> > possitions = myClientGpsData.getInitialGeo();
-	vector<vector<bool> > satellites = myClientGpsData.getSatellites();
-
-	double f = 0.0;
-	cout << "Initialized client data structures\n";
-
-	ofstream outfile;
-  	outfile.open ( "corrected.csv");
-  	cout <<"Attempting to write csv file \n";
-	for (int i = 0; i<this->lines; i++) {
-		//outfile << to_string(times[i]) << ","; *********** to_string causing isues
-		for (int j=0; j< 3; j++) {
-			//outfile << to_string((possitions[i][j]))  << ","; *********** to_string causing isues
-		}
-		for (int j=0; j<86; j++) {
-			if (satellites[i][j]) {
-				outfile << j << ",";
-			}
-
-		}
-		outfile << "\n";
-	}
-	cout <<"Closing file and returning \n";
-  	outfile.close();
-  }
-template <class T>
-inline std::string to_string (const T& t)
-{
-    std::stringstream ss;
-    ss << t;
-    return ss.str();
 }

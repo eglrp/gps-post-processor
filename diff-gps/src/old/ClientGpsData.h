@@ -6,7 +6,6 @@
 #include <vector>
 #include <stdlib.h>
 #include <iostream>
-#include <sstream>
 
 using namespace std;
 
@@ -24,41 +23,41 @@ class ClientGpsData {
     static const int M = 86;
     static const int AXES = 3;
 
-    vector<long long> theTime;
-    vector<vector<long double> > initialCart; //[N][AXES];
-    vector<vector<long double> > correctedCart; //[N][AXES];
-    vector<vector<long double> > initialGeo; //[N][AXES];
-    vector<vector<long double> > correctedGeo; //[N][AXES];
+    vector<long> theTime;
+    vector<vector<double> > initialCart; //[N][AXES];
+    vector<vector<double> > correctedCart; //[N][AXES];
+    vector<vector<double> > initialGeo; //[N][AXES];
+    vector<vector<double> > correctedGeo; //[N][AXES];
     vector<vector<bool> > satellites; //[N][M];
     vector<int8_t> flags; //[N];
     string inUnits;
     string outUnits;
     string nearestStationID;
-    vector<long double> stationCoords; //[AXES];
+    vector<double> stationCoords; //[AXES];
     double stationDist;
 
   public:
-    ClientGpsData(int,vector<long long>,vector<vector<long double> >,vector<vector<bool> >);
-    
     ClientGpsData(int);
 
-    vector<long long> getTheTime();
-    void setTheTime(const vector<long long>&);
+    ClientGpsData(int,vector<long>,vector<vector<double> >,vector<vector<bool> >);
+
+    vector<long> getTheTime();
+    void setTheTime(const vector<long>&);
 
     vector<int8_t> getFlags();
     void setFlags(const vector<int8_t>&);
 
-    vector<vector<long double> > getInitialCart();
-    void setInitialCart(const vector<vector<long double> >&);
+    vector<vector<double> > getInitialCart();
+    void setInitialCart(const vector<vector<double> >&);
 
-    vector<vector<long double> > getCorrectedCart();
-    void setCorrectedCart(const vector<vector<long double> >&);
+    vector<vector<double> > getCorrectedCart();
+    void setCorrectedCart(const vector<vector<double> >&);
 
-    vector<vector<long double> > getInitialGeo();
-    void setInitialGeo(const vector<vector<long double> >&);
+    vector<vector<double> > getInitialGeo();
+    void setInitialGeo(const vector<vector<double> >&);
 
-    vector<vector<long double> > getCorrectedGeo();
-    void setCorrectedGeo(const vector<vector<long double> >&);
+    vector<vector<double> > getCorrectedGeo();
+    void setCorrectedGeo(const vector<vector<double> >&);
 
     string getInUnits();
     void setInUnits(const string&);
@@ -69,11 +68,11 @@ class ClientGpsData {
     string getNearestStationID();
     void setNearestStationID(const string&);
 
-    vector<long double> getStationCoords();
-    void setStationCoords(const vector<long double>&);
+    vector<double> getStationCoords();
+    void setStationCoords(const vector<double>&);
 
-    long double getStationDist();
-    void setStationDist(const long double&);
+    double getStationDist();
+    void setStationDist(const double&);
 
     vector<vector<bool> > getSatellites();
     void setSatellites( const vector<vector<bool> >&);
