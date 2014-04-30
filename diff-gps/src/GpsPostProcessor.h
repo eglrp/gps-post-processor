@@ -5,6 +5,7 @@
 #include "ClientGpsData.h"
 #include "UnitConverter.h"
 #include "FileSystemMgr.h"
+#include "BaseStationMgr.h"
 #include <vector>
 #include <stdint.h>
 
@@ -16,7 +17,7 @@ class GpsPostProcessor {
     GpsPostProcessor& operator=(GpsPostProcessor const&);
     CsvHandler myCsvHandler;
 
-    // BaseStationMgr *    bsM;
+    BaseStationMgr    bsMgr;
     // CsvHandler *        csvHandler;
     // DownloadMgr *       dlMgr;
     

@@ -7,6 +7,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <math.h> 
 #include "BaseStation.h"
 #include "ClientGpsData.h"
 
@@ -19,12 +20,12 @@ class BaseStationMgr {
   	int numStations;
     string fileName;
   	void countLines();
-  	double calDist(vector<double>,vector<double>);
-  	BaseStation nearestStation(vector<double>);
+  	long double calDist(vector<long double>,vector<long double>);
+  	BaseStation nearestStation(vector<long double>);
   	void initializeStationList();
   public:
   	BaseStationMgr();
-  	void getNearestRinex(ClientGpsData);
+  	void getNearestRinex(ClientGpsData&);
   	
 };
 #endif

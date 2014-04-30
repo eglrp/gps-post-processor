@@ -86,7 +86,7 @@ ClientGpsData CsvHandler::readCsv(){
     cout << "created instance of ClientGpsData\n";
     //vector<vector<long double> > possitions = myClientGpsData.getP;
     cout << "size of possitons ==";
-    cout << possitions.size();
+    cout << possitions.size() << "\n";
     return myClientGpsData;
 }
 void CsvHandler::writeCsv(ClientGpsData myClientGpsData){
@@ -102,15 +102,14 @@ void CsvHandler::writeCsv(ClientGpsData myClientGpsData){
   	outfile.open ( "corrected.csv");
   	cout <<"Attempting to write csv file \n";
 	for (int i = 0; i<this->lines; i++) {
-		//outfile << to_string(times[i]) << ","; *********** to_string causing isues
+		//outfile << to_string(times[i]) << ","; *********** to_string causing issues
 		for (int j=0; j< 3; j++) {
-			//outfile << to_string((possitions[i][j]))  << ","; *********** to_string causing isues
+			//outfile << to_string((possitions[i][j]))  << ","; *********** to_string causing issues
 		}
 		for (int j=0; j<86; j++) {
 			if (satellites[i][j]) {
 				outfile << j << ",";
 			}
-
 		}
 		outfile << "\n";
 	}

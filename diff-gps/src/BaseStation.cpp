@@ -3,17 +3,17 @@
 using namespace std;
 
 BaseStation::BaseStation() {
-	
+
 }
-BaseStation::BaseStation(vector<double> pos,string ID) {
+BaseStation::BaseStation(vector<long double> pos,string ID) {
 	this->trueEcefCoord = pos;
 	this->stationId = ID;
 }
 
-vector<double> BaseStation::getTrueEcefCoord() {
+vector<long double> BaseStation::getTrueEcefCoord() {
 	return this->trueEcefCoord;
 }
-void BaseStation::setTrueEcefCoord(vector<double> coord) {
+void BaseStation::setTrueEcefCoord(vector<long double> coord) {
 	this->trueEcefCoord = coord;
 }
 

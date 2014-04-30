@@ -13,14 +13,14 @@ using namespace std;
 class BaseStation {
 
   private:
-  	vector<double> trueEcefCoord;
+  	vector<long double> trueEcefCoord;
   	string stationId;
   public:
   	BaseStation();
-  	BaseStation(vector<double>,string);
+  	BaseStation(vector<long double>,string);
   	string getStationId();
-  	vector<double> getTrueEcefCoord();
-  	void setTrueEcefCoord(vector<double>);
+  	vector<long double> getTrueEcefCoord();
+  	void setTrueEcefCoord(vector<long double>);
   	void setStationId(string);
 };
 #endif

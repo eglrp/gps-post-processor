@@ -11,13 +11,13 @@ using namespace std;
 class UnitConverter {
 private:
 	// ellipsoid properties required for GPSTk's coordinate conversions
-	double A;
-	double eccSq;
+	long double A;
+	long double eccSq;
 
 public:
 	UnitConverter();
-	vector<double> geoToCart(double, double, double); // Geodetic WGS84 Ellipsoid (degrees/meters) to ECEF Cartesian (meters)
-	vector<double> cartToGeo(double, double, double); // ECEF Cartesian (meters) to Geodetic WGS84 Ellipsoid (degrees/meters)
+	vector<long double> geoToCart(long double, long double, long double); // Geodetic WGS84 Ellipsoid (degrees/meters) to ECEF Cartesian (meters)
+	vector<long double> cartToGeo(long double, long double, long double); // ECEF Cartesian (meters) to Geodetic WGS84 Ellipsoid (degrees/meters)
 	//string getYear(int unixTime);
 	//string getDayOfYear(int unixTime);
 
