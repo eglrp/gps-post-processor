@@ -8,6 +8,7 @@ GpsPostProcessor& GpsPostProcessor::getInstance() {
   instanceGPSPP.myCsvHandler = CsvHandler();
   instanceGPSPP.fsMgr = FileSystemMgr();
   instanceGPSPP.bsMgr = BaseStationMgr();
+  instanceGPSPP.rnxMgr = RinexMgr();
   return instanceGPSPP;
 }
 
@@ -22,6 +23,7 @@ void GpsPostProcessor::runPostProcessor(string filename) {
   }
   myClientData.setInitialCart(clientEcef);
   bsMgr.getNearestRinex(myClientData);
+  rnxMgr.possitionSolution(myClientData);
   //cout << fsMgr.getRinexUrl(myClientData.getStationId(),myClientData.get);
 	//vector<long>  times = myClientData.getTheTime();
 	//cout << times[0] << "\n" << times[1] << "\n"<< times[2] << "\n";

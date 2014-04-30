@@ -6,6 +6,7 @@
 #include "UnitConverter.h"
 #include "FileSystemMgr.h"
 #include "BaseStationMgr.h"
+#include "RinexMgr.h"
 #include <vector>
 #include <stdint.h>
 
@@ -17,11 +18,11 @@ class GpsPostProcessor {
     GpsPostProcessor& operator=(GpsPostProcessor const&);
     CsvHandler myCsvHandler;
 
-    BaseStationMgr    bsMgr;
+    BaseStationMgr bsMgr;
     // CsvHandler *        csvHandler;
     // DownloadMgr *       dlMgr;
     
-    // RinexMgr *          rinexMgr;
+    RinexMgr rnxMgr;
 
   public:
     UnitConverter unitConverter;
