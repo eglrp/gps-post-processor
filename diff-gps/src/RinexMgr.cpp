@@ -63,6 +63,7 @@ void RinexMgr::possitionSolution(ClientGpsData& myClientGpsData){
          exit(1);
       }
       int iteration = 0;
+      //double minX=, minY, minZ, maxX, maxY, maxZ;
       //Process Lines of the observation file
       while( roffs >> rod )
       {
@@ -176,10 +177,21 @@ void RinexMgr::possitionSolution(ClientGpsData& myClientGpsData){
             cout << "------------------------------------------------\n";
             cout << "For iteration #: "<< iteration << "\n";
             if (Sol.size() == 4) { 
-              cout << "x == "<< Sol[0] << "\n";
-              cout << "y == "<< Sol[1] << "\n";
-              cout << "z == "<< Sol[2] << "\n";
-              cout << "time == "<< Sol[3] << "\n";
+              cout << "x == ";
+              printf("%lf \n", Sol[0]);
+              cout << "y == ";
+              printf("%lf \n", Sol[1]);
+              cout << "z == ";
+              printf("%lf \n", Sol[2]);
+              cout << "common time == ";
+              printf("%lf \n", Sol[3]);
+              vector<long double>pos = myClientGpsData.getStationCoords();
+              vector<double> pos1(3);
+              pos1[0] = (double) pos[0];
+              pos1[1] = (double) pos[1];
+              pos1[2] = (double) pos[2];
+              Vector<double>pos2 = Sol;
+              cout << "Distance from known station postion: "<<sqrt(((pos1[0]-pos2[0])*(pos1[0]-pos2[0])) + ((pos1[1]-pos2[1])*(pos1[1]-pos2[1])) + ((pos1[2]-pos2[2])*(pos1[2]-pos2[2]))) << "\n";
             }
 
             
