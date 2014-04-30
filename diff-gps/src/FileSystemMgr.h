@@ -10,14 +10,16 @@
 using namespace std;
 
 class FileSystemMgr{
+	private:
+		string getPartialRinexUrl(string stationID, long long ut);
+
 	public:
 		FileSystemMgr();
-		string getRinexUrl(); //string stationID, long ut
-		string getAltRinexUrl(string stationID, long ut);
+		string getRinexUrl(string stationID, long long ut); //string stationID, long ut
+		string getAltRinexUrl(string stationID, long long ut);
 		string getRinexDir();
-		string getRinexFileNames(string stationID, long ut);
-		string getRinexPath(string stationID, long ut);
-
+		string getRinexFileName(string stationID, long long ut);
+		string getRinexPath(string stationID, long long ut);
 };
 
 #endif

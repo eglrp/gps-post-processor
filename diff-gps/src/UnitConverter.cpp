@@ -34,3 +34,11 @@ vector<long double> UnitConverter::cartToGeo(long double x, long double y, long 
 
   return geoVec;
 }
+
+string UnitConverter::getYear(int unixTime) {
+  return "YYYY";
+}
+
+string UnitConverter::getDayOfYear(int unixTime) {
+  return "DOY";
+}

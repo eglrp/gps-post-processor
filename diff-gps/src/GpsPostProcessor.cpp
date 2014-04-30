@@ -12,6 +12,7 @@ GpsPostProcessor& GpsPostProcessor::getInstance() {
 }
 
 void GpsPostProcessor::runPostProcessor(string filename) {
+
 	ClientGpsData myClientData = myCsvHandler.getClientData(filename);
   vector<vector<long double> > clientGeo = myClientData.getInitialGeo();
   vector<vector<long double> > clientEcef = clientGeo;
@@ -21,18 +22,17 @@ void GpsPostProcessor::runPostProcessor(string filename) {
   }
   myClientData.setInitialCart(clientEcef);
   bsMgr.getNearestRinex(myClientData);
+  //cout << fsMgr.getRinexUrl(myClientData.getStationId(),myClientData.get);
 	//vector<long>  times = myClientData.getTheTime();
 	//cout << times[0] << "\n" << times[1] << "\n"<< times[2] << "\n";
 }
-
-
 
 int main(int argc, char* argv[]) {
 
   GpsPostProcessor& gpp = GpsPostProcessor::getInstance();
   cout << "created instance of GpsPostProcessor\n";
   gpp.runPostProcessor("./client-data/loc_log__2014_62_1812.csv");
-  cout << gpp.fsMgr.getRinexUrl();
+  
   // unitconverter test code (best practice would be to have real unit tests with
   // known values)
   long double lat = 1.0;
