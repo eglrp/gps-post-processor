@@ -18,7 +18,9 @@ Other links
 
 (This probably only works on 64-bit Ubuntu 12, the OS setup on the CU CSCI VM)
 
-The source is included in the repo as a tarball to keep the size smaller. To extract it to a `gpstk/` directory:
+The source is included in the repo as a tarball to keep the size smaller. It
+will need to be extracted for the include paths to work correctly. To extract it
+to a `gpstk/` directory:
 ```
 cd diff-gps/
 tar xvzf gpstk-2.1.src.tar.gz
