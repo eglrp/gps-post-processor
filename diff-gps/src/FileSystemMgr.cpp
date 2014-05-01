@@ -1,4 +1,5 @@
 #include "FileSystemMgr.h"
+#include "UnitConverter.h"
 
 using namespace std;
 
@@ -6,7 +7,10 @@ FileSystemMgr::FileSystemMgr(){}
 
 string FileSystemMgr::getRinexUrl(string stationID, long long ut){ //string stationID, long ut
 	// The Url is ftp://www.ngs.noaa.gov/cors/rinex/{4 CHAR YEAR}/{3 CHAR DAY OF YEAR}/{4 CHAR STATION ID}/
-	return"not done yet getRinexUrl\n";
+	string year = UnitConverter::getYear(ut);
+	string day = UnitConverter::getDayOfYear(ut);
+	string Url = "ftp://www.ngs.noaa.gov/cors/rinex/" + year +"/" + day +"/" + stationID + "/";
+	return Url;
 }
 
 string FileSystemMgr::getAltRinexUrl(string stationID, long long ut) {

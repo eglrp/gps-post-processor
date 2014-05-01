@@ -15,11 +15,11 @@ class FileSystemMgr{
 
 	public:
 		FileSystemMgr();
-		string getRinexUrl(string stationID, long long ut); //string stationID, long ut
-		string getAltRinexUrl(string stationID, long long ut);
-		string getRinexDir();
-		string getRinexFileName(string stationID, long long ut);
-		string getRinexPath(string stationID, long long ut);
+		static string getRinexUrl(string stationID, long long ut); //string stationID, long ut
+		static string getAltRinexUrl(string stationID, long long ut);
+		static string getRinexDir();
+		static string getRinexFileName(string stationID, long long ut);
+		static string getRinexPath(string stationID, long long ut);
 };
 
 #endif
