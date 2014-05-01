@@ -154,8 +154,8 @@ void RinexMgr::possitionSolution(ClientGpsData& myClientGpsData){
             //Prepare constance and output vectors for AutonomousPRSolution
             vector<bool> use;
          	  bool algebraic = false;
-            int n_iterate = 10;
-            double converge = 3.e-7;
+            int n_iterate = 30;
+            double converge = 3.e-8;
             Vector<double> Sol;
             Matrix<double> Cov;
             Vector<double> Resid(prnVec.size());
@@ -173,7 +173,7 @@ void RinexMgr::possitionSolution(ClientGpsData& myClientGpsData){
                                       Resid,
                                       Slope,
                                       pDebug);
-            
+            if (iteration > 675 && iteration < 678) {
             cout << "------------------------------------------------\n";
             cout << "For iteration #: "<< iteration << "\n";
             if (Sol.size() == 4) { 
@@ -192,6 +192,7 @@ void RinexMgr::possitionSolution(ClientGpsData& myClientGpsData){
               pos1[2] = (double) pos[2];
               Vector<double>pos2 = Sol;
               cout << "Distance from known station postion: "<<sqrt(((pos1[0]-pos2[0])*(pos1[0]-pos2[0])) + ((pos1[1]-pos2[1])*(pos1[1]-pos2[1])) + ((pos1[2]-pos2[2])*(pos1[2]-pos2[2]))) << "\n";
+            }
             }
 
             

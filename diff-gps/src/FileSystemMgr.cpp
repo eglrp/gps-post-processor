@@ -24,12 +24,15 @@ string FileSystemMgr::getAltRinexUrl(string stationID, long long ut) {
 }
 
 string FileSystemMgr::getRinexDir(){
-	return "not done yet getRinexDir\n";
+	return "./RINEX/";
 }
 
-string FileSystemMgr::getRinexFileName(string stationID, long long ut){
+string FileSystemMgr::getRinexFileName(string stationID, long long ut, string fileType){
+
+	string year = UnitConverter::getYear(ut);
+	string filename = stationID + UnitConverter::getDayOfYear(ut) + "0." + year[2] + year[3] +fileType;
 	// The RINEX filenames are {4 CHAR STATION ID}{3 CHAR DAY OF YEAR}0.{LAST TWO CHARS OF YEAR I.E. 14 FOR 2014}{either "n" for nav files or "o" for obs files}
-	return "not done yet getRinexFileName\n";
+	return filename;
 }
 string FileSystemMgr::getRinexPath(string stationID, long long ut){
 	return "not done yet getRinexPath\n";
