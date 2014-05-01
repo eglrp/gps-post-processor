@@ -14,18 +14,11 @@ private:
 
 public:
 	UnitConverter();
-<<<<<<< HEAD
-	vector<long double> geoToCart(long double, long double, long double); // Geodetic WGS84 Ellipsoid (degrees/meters) to ECEF Cartesian (meters)
-	vector<long double> cartToGeo(long double, long double, long double); // ECEF Cartesian (meters) to Geodetic WGS84 Ellipsoid (degrees/meters)
-	string getYear(int unixTime);
-	string getDayOfYear(int unixTime);
-=======
 	static vector<long double> geoToCart(long double, long double, long double); // Geodetic WGS84 Ellipsoid (degrees/meters) to ECEF Cartesian (meters)
 	static vector<long double> cartToGeo(long double, long double, long double); // ECEF Cartesian (meters) to Geodetic WGS84 Ellipsoid (degrees/meters)
-	static string getYear(long long unixTime);
-	static string getDayOfYear(long long unixTime);
+	static string getYear(long unixTime);
+	static string getDayOfYear(long unixTime);
 
->>>>>>> e02ab09ec165b95b57f0360edc6589ed21197a1c
 };
 
 #endif
