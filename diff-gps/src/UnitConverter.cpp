@@ -1,17 +1,20 @@
 #include "UnitConverter.h"
 
+// Position, Triple, WGS84Ellipsoid
+using namespace gpstk;
+
 UnitConverter::UnitConverter() {
-  gpstk::WGS84Ellipsoid ellipsoid;
+  WGS84Ellipsoid ellipsoid;
 
   A = ellipsoid.a();
   eccSq = ellipsoid.eccSquared();
 }
 
 vector<long double> UnitConverter::geoToCart(long double lat, long double lon, long double alt) {
-  gpstk::Triple geoTrip (lat, lon, alt);
-  gpstk::Triple cartTrip;
+  Triple geoTrip (lat, lon, alt);
+  Triple cartTrip;
 
-  gpstk::Position::convertGeodeticToCartesian(geoTrip, cartTrip, A, eccSq);
+  Position::convertGeodeticToCartesian(geoTrip, cartTrip, A, eccSq);
 
   vector<long double> cartVec (3,0);
   cartVec[0] = cartTrip[0];
@@ -22,10 +25,10 @@ vector<long double> UnitConverter::geoToCart(long double lat, long double lon, l
 }
 
 vector<long double> UnitConverter::cartToGeo(long double x, long double y, long double z) {
-  gpstk::Triple cartTrip (x, y, z);
-  gpstk::Triple geoTrip;
+  Triple cartTrip (x, y, z);
+  Triple geoTrip;
 
-  gpstk::Position::convertCartesianToGeodetic(cartTrip, geoTrip, A, eccSq);
+  Position::convertCartesianToGeodetic(cartTrip, geoTrip, A, eccSq);
 
   vector<long double> geoVec (3,0);
   geoVec[0] = geoTrip[0];
