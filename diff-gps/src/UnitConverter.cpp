@@ -2,17 +2,14 @@
 
 // Position, Triple, WGS84Ellipsoid
 using namespace gpstk;
-
-UnitConverter::UnitConverter() {
-  WGS84Ellipsoid ellipsoid;
-
-  A = ellipsoid.a();
-  eccSq = ellipsoid.eccSquared();
-}
-
 vector<long double> UnitConverter::geoToCart(long double lat, long double lon, long double alt) {
   Triple geoTrip (lat, lon, alt);
   Triple cartTrip;
+
+  WGS84Ellipsoid ellipsoid;
+
+  double A = ellipsoid.a();
+  double eccSq = ellipsoid.eccSquared();
 
   Position::convertGeodeticToCartesian(geoTrip, cartTrip, A, eccSq);
 
@@ -28,6 +25,11 @@ vector<long double> UnitConverter::cartToGeo(long double x, long double y, long 
   Triple cartTrip (x, y, z);
   Triple geoTrip;
 
+  WGS84Ellipsoid ellipsoid;
+
+  double A = ellipsoid.a();
+  double eccSq = ellipsoid.eccSquared();
+
   Position::convertCartesianToGeodetic(cartTrip, geoTrip, A, eccSq);
 
   vector<long double> geoVec (3,0);
@@ -37,6 +39,14 @@ vector<long double> UnitConverter::cartToGeo(long double x, long double y, long 
 
   return geoVec;
 }
+
+// string UnitConverter::getYear(CommonTime ct) {
+//   return "YYYY";
+// }
+
+// string UnitConverter::getDayOfYear(CommonTime ct) {
+//   return "DOY";
+// }
 
 string UnitConverter::getYear(int unixTime) {
   return "YYYY";
