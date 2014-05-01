@@ -53,5 +53,24 @@ int main(int argc, char* argv[]) {
   printf("UnitConverter test cartToGeo\n  in: %Lf, %Lf, %Lf\n", x, y, z);
   printf("  out: %Lf, %Lf, %Lf\n\n", geocentric[0], geocentric[1], geocentric[2]);
 
+  
+  // in seconds
+  long long one_year = 60 * 60 * 24 * 365;
+  long long one_day = 60 * 60 * 24;
+  
+  // 3 years, 2 days; getYear should be 3, getDayOfYear should be 32
+  long long u_time = (3 * one_year) + (32 * one_day) + 100;
+
+  string year = UnitConverter::getYear(u_time);
+  string dayOfYear = UnitConverter::getDayOfYear(u_time);
+
+  // should output 3
+  printf("\n\nUnitConverter test getYear\n  in: %Ld\n  out: ", u_time);
+  cout << year << endl;
+
+  // should output 2
+  printf("\n\nUnitConverter test getDayOfYear\n  in: %Ld\n  out: ", u_time);
+  cout << dayOfYear << endl;
+
   return 0;
 }

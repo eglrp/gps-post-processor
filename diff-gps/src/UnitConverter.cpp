@@ -40,18 +40,18 @@ vector<long double> UnitConverter::cartToGeo(long double x, long double y, long 
   return geoVec;
 }
 
-// string UnitConverter::getYear(CommonTime ct) {
-//   return "YYYY";
-// }
-
-// string UnitConverter::getDayOfYear(CommonTime ct) {
-//   return "DOY";
-// }
-
-string UnitConverter::getYear(int unixTime) {
-  return "YYYY";
+// input: seconds in unix time
+// output: the year as a string
+string UnitConverter::getYear(long long unixTime) {
+  ostringstream oss;
+  oss << unixTime / (60 * 60 * 24 * 365);
+  return oss.str();
 }
 
-string UnitConverter::getDayOfYear(int unixTime) {
-  return "DOY";
+// input: seconds in unix time
+// output: the day of the year as a string (1 is Jan 1, 365 is Dec 31)
+string UnitConverter::getDayOfYear(long long unixTime) {
+  ostringstream oss;
+  oss << (unixTime / (60 * 60 * 24)) % 365;
+  return oss.str();
 }
