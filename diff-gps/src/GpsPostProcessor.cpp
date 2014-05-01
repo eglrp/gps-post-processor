@@ -58,7 +58,7 @@ int main(int argc, char* argv[]) {
   long one_year = 60 * 60 * 24 * 365;
   long one_day = 60 * 60 * 24;
   
-  // 3 years, 2 days; getYear should be 3, getDayOfYear should be 32
+  // 3 years, 2 days; getYear should be 1973, getDayOfYear should be 32
   long u_time = (3 * one_year) + (32 * one_day) + 100;
 
   string year = UnitConverter::getYear(u_time);

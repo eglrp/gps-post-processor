@@ -44,7 +44,7 @@ vector<long double> UnitConverter::cartToGeo(long double x, long double y, long 
 // output: the year as a string
 string UnitConverter::getYear(long unixTime) {
   ostringstream oss;
-  oss << unixTime / (60 * 60 * 24 * 365);
+  oss << (unixTime / (60 * 60 * 24 * 365)) + 1970;
   return oss.str();
 }
 
