@@ -25,7 +25,6 @@ class GpsPostProcessor {
     RinexMgr rnxMgr;
 
   public:
-    UnitConverter unitConverter;
     FileSystemMgr     fsMgr;
 
     static GpsPostProcessor& getInstance();

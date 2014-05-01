@@ -1,17 +1,17 @@
 #include "UnitConverter.h"
 
-UnitConverter::UnitConverter() {
-  gpstk::WGS84Ellipsoid ellipsoid;
-
-  A = ellipsoid.a();
-  eccSq = ellipsoid.eccSquared();
-}
-
+// Position, Triple, WGS84Ellipsoid
+using namespace gpstk;
 vector<long double> UnitConverter::geoToCart(long double lat, long double lon, long double alt) {
-  gpstk::Triple geoTrip (lat, lon, alt);
-  gpstk::Triple cartTrip;
+  Triple geoTrip (lat, lon, alt);
+  Triple cartTrip;
 
-  gpstk::Position::convertGeodeticToCartesian(geoTrip, cartTrip, A, eccSq);
+  WGS84Ellipsoid ellipsoid;
+
+  double A = ellipsoid.a();
+  double eccSq = ellipsoid.eccSquared();
+
+  Position::convertGeodeticToCartesian(geoTrip, cartTrip, A, eccSq);
 
   vector<long double> cartVec (3,0);
   cartVec[0] = cartTrip[0];
@@ -22,10 +22,15 @@ vector<long double> UnitConverter::geoToCart(long double lat, long double lon, l
 }
 
 vector<long double> UnitConverter::cartToGeo(long double x, long double y, long double z) {
-  gpstk::Triple cartTrip (x, y, z);
-  gpstk::Triple geoTrip;
+  Triple cartTrip (x, y, z);
+  Triple geoTrip;
 
-  gpstk::Position::convertCartesianToGeodetic(cartTrip, geoTrip, A, eccSq);
+  WGS84Ellipsoid ellipsoid;
+
+  double A = ellipsoid.a();
+  double eccSq = ellipsoid.eccSquared();
+
+  Position::convertCartesianToGeodetic(cartTrip, geoTrip, A, eccSq);
 
   vector<long double> geoVec (3,0);
   geoVec[0] = geoTrip[0];
@@ -35,10 +40,18 @@ vector<long double> UnitConverter::cartToGeo(long double x, long double y, long 
   return geoVec;
 }
 
-string UnitConverter::getYear(int unixTime) {
-  return "YYYY";
+// input: seconds in unix time
+// output: the year as a string
+string UnitConverter::getYear(long long unixTime) {
+  ostringstream oss;
+  oss << unixTime / (60 * 60 * 24 * 365);
+  return oss.str();
 }
 
-string UnitConverter::getDayOfYear(int unixTime) {
-  return "DOY";
+// input: seconds in unix time
+// output: the day of the year as a string (1 is Jan 1, 365 is Dec 31)
+string UnitConverter::getDayOfYear(long long unixTime) {
+  ostringstream oss;
+  oss << (unixTime / (60 * 60 * 24)) % 365;
+  return oss.str();
 }
