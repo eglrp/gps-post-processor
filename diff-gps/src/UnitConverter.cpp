@@ -42,7 +42,7 @@ vector<long double> UnitConverter::cartToGeo(long double x, long double y, long 
 
 // input: seconds in unix time
 // output: the year as a string
-string UnitConverter::getYear(long unixTime) {
+string UnitConverter::getYear(long long unixTime) {
   ostringstream oss;
   oss << (unixTime / (60 * 60 * 24 * 365)) + 1970;
   return oss.str();
@@ -50,8 +50,20 @@ string UnitConverter::getYear(long unixTime) {
 
 // input: seconds in unix time
 // output: the day of the year as a string (1 is Jan 1, 365 is Dec 31)
-string UnitConverter::getDayOfYear(long unixTime) {
+string UnitConverter::getDayOfYear(long long unixTime) {
   ostringstream oss;
   oss << (unixTime / (60 * 60 * 24)) % 365;
   return oss.str();
+}
+
+
+long long UnitConverter::getUnixTime(CommonTime commonTime) {
+  UnixTime ut(commonTime);
+  ostringstream oss;
+  oss << ut;
+  string utStr = oss.str();
+  //cout << "UT == " << utStr << "\n";
+  long long longUt = 0.0;
+  sscanf(utStr.c_str(),"%lli",&longUt);
+  return longUt;
 }

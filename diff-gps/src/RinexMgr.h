@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include "ClientGpsData.h"
+#include "UnitConverter.h"
 
 // Classes for handling observations RINEX files (data)
 #include "Rinex3ObsHeader.hpp"

@@ -11,6 +11,9 @@ ClientGpsData::ClientGpsData(int length, vector<long long> theTime, vector<vecto
 	this->theTime = theTime;
 	cout << "set time\n";
 	this->satellites = satellites;
+	vector<int8_t> flg_vec;
+	//this->flags = flg_vec;
+	this->flags.resize(length);
 	cout << "set satellites\n";
 	cout << initialCoords.size() << "\n";
 	cout << length << "\n";
@@ -18,10 +21,12 @@ ClientGpsData::ClientGpsData(int length, vector<long long> theTime, vector<vecto
 	cout << satellites.size() << "\n";
 	if (initialCoords[0][0] <  91.0) {
 		this->initialGeo = initialCoords;
+		this->correctedGeo = initialCoords;
 		this->inUnits = "Geo";
 	}
 	else {
 		this->initialCart = initialCoords;
+		this->correctedCart = initialCoords;
 		this->inUnits = "Cart";
 	}
 	cout << "set init coords\n";

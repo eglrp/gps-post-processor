@@ -13,9 +13,9 @@ RinexMgr::RinexMgr () {
 void RinexMgr::possitionSolution(ClientGpsData& myClientGpsData){
 
 	//File names to be replaced with calls to FileSystemMgr
-	string obsFile = "./RINEX/dsrc0800.14o";
+	string obsFile = "./RINEX/dsrc0630.14o";
 	string lastNavFile = "./RINEX/brdc0800.14n";
-	string currentNavFile = "./RINEX/brdc0800.14n";
+	string currentNavFile = "./RINEX/brdc0630.14n";
 	string nextNavFile = "./RINEX/brdc0800.14n";
 
 	GPSEphemerisStore bcestore;
@@ -132,6 +132,22 @@ void RinexMgr::possitionSolution(ClientGpsData& myClientGpsData){
                 *pDebugStream << fixed << setw(16) << setprecision(3) << SVP << endl;
             }
             */
+            long long ut = UnitConverter::getUnixTime(rod.time);
+            vector<vector<long double> > clientEcef = myClientGpsData.getInitialCart();
+            vector<vector<bool> > clientSats = myClientGpsData.getSatellites();
+            vector<long long> clientTimes = myClientGpsData.getTheTime();
+            vector<int8_t>  clientFlags = myClientGpsData.getFlags();
+            //cout << UnitConverter::getDayOfYear((clientTimes[iteration]/1000)) << "\n";
+
+            //cout << ut << "   !=    " << (clientTimes[0]) << "\n";
+            //cout << (abs((clientTimes[0]/1000) - ut)) << "\n";
+            
+
+
+
+
+
+
             for (N=0,i=0; i<prnVec.size(); i++)
             {
               if (prnVec[i].id > 0)
@@ -150,7 +166,7 @@ void RinexMgr::possitionSolution(ClientGpsData& myClientGpsData){
             //if (N < prnVec.size()) return -3;
 
 
-
+            int x = prnVec[0].id;
             //Prepare constance and output vectors for AutonomousPRSolution
             vector<bool> use;
          	  bool algebraic = false;
@@ -160,7 +176,8 @@ void RinexMgr::possitionSolution(ClientGpsData& myClientGpsData){
             Matrix<double> Cov;
             Vector<double> Resid(prnVec.size());
             Vector<double> Slope(rangeVec.size());
-
+            //cout << "The size of UseSat is: " << UseSat.size() << "\n";
+            //cout << prnVec[0].id << prnVec[1].id << prnVec[2].id << prnVec[3].id << prnVec[4].id << prnVec[5].id<< "\n";
          	  PRSolver.AutonomousPRSolution(rod.time,
                                       UseSat,
                                       SVP,
@@ -173,9 +190,12 @@ void RinexMgr::possitionSolution(ClientGpsData& myClientGpsData){
                                       Resid,
                                       Slope,
                                       pDebug);
-            if (iteration > 675 && iteration < 678) {
+            //double dist;
+            /*if (iteration < 675 && iteration < 679) {
+            
             cout << "------------------------------------------------\n";
             cout << "For iteration #: "<< iteration << "\n";
+            cout << "UT == " << ut << "\n";
             if (Sol.size() == 4) { 
               cout << "x == ";
               printf("%lf \n", Sol[0]);
@@ -185,14 +205,23 @@ void RinexMgr::possitionSolution(ClientGpsData& myClientGpsData){
               printf("%lf \n", Sol[2]);
               cout << "common time == ";
               printf("%lf \n", Sol[3]);
+              */
               vector<long double>pos = myClientGpsData.getStationCoords();
               vector<double> pos1(3);
               pos1[0] = (double) pos[0];
               pos1[1] = (double) pos[1];
               pos1[2] = (double) pos[2];
               Vector<double>pos2 = Sol;
-              cout << "Distance from known station postion: "<<sqrt(((pos1[0]-pos2[0])*(pos1[0]-pos2[0])) + ((pos1[1]-pos2[1])*(pos1[1]-pos2[1])) + ((pos1[2]-pos2[2])*(pos1[2]-pos2[2]))) << "\n";
-            }
+              double dist = sqrt(((pos1[0]-pos2[0])*(pos1[0]-pos2[0])) + ((pos1[1]-pos2[1])*(pos1[1]-pos2[1])) + ((pos1[2]-pos2[2])*(pos1[2]-pos2[2])));
+              //cout << "Distance from known station postion: "<< dist << "\n";
+            //}
+            //}
+            for(int S = 0; S < clientSats.size(); S++) { 
+              if (clientFlags[S] != 1 && abs((clientTimes[S]/1000) - ut) < 60 ) { 
+                cout << "Client posstion fix at " << (clientTimes[S]/1000)<< "-UT corrected by " << dist << " meters.\n";
+                clientFlags[S] = 1;
+
+              }
             }
 
             
